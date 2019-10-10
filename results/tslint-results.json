@@ -1,0 +1,1 @@
+[{"endPosition":{"character":26,"line":11,"position":264},"failure":"Type boolean trivially inferred from a boolean literal, remove type annotation","fix":{"innerStart":255,"innerLength":9,"innerText":""},"name":"C:/Users/ponyracer/src/app/menu/menu.component.ts","ruleName":"no-inferrable-types","ruleSeverity":"ERROR","startPosition":{"character":19,"line":11,"position":257}}]
