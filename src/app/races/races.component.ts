@@ -13,7 +13,7 @@ export class RacesComponent implements OnInit {
   constructor(private raceService: RaceService) { }
 
   ngOnInit() {
-    this.raceService.list().subscribe(races => (this.races = races));
+    this.raceService.getRacesFromApi().subscribe(races => (this.races = races));
   }
 }
 

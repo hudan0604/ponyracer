@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { RaceModel } from './models/race.model';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import * as global from './endpoints/races';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RaceService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
   list(): Observable<Array<RaceModel>> {
     return of([
       {
@@ -34,5 +37,9 @@ export class RaceService {
         startInstant: '2016-02-18T08:03:00Z'
       }
     ]).pipe(delay(500));
+  }
+
+  getRacesFromApi(): Observable<any> {
+    return this.http.get(global.endpoint + '/api/races');
   }
 }

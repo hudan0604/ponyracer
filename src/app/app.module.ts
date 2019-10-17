@@ -6,10 +6,11 @@ import { MenuComponent } from './menu/menu.component';
 import { RacesComponent } from './races/races.component';
 import { RaceComponent } from './race/race.component';
 import { PonyComponent } from './pony/pony.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, MenuComponent, RacesComponent, RaceComponent, PonyComponent],
-  imports: [BrowserModule],
+  imports: [BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })
