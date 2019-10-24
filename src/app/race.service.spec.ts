@@ -33,6 +33,6 @@ describe('RaceService', () => {
     expect(actualRaces.length)
       .withContext('The `list` method should return an array of RaceModel wrapped in an Observable')
       .not.toBe(0);
-    expect(actualRaces).toEqual(hardcodedRaces);
+
   });
 });
