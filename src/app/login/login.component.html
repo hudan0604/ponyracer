@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Log in</h1>
+
+        <div id="login-error" class="alert alert-danger" *ngIf="loginFailed">
+            <button type="button" class="close" aria-label="Close" (click)="loginFailed = false">
+                <span aria-hidden="true">&#215;</span>
+            </button>
+            Unknown user, try again.
+        </div>
+
+
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+            <div class="form-group">
+                <label for="login" id="login-label">Username</label>
+                <input [ngClass]="{'inputError': loginCtrl.dirty && loginCtrl.invalid}" type="text" id="login"
+                    class="form-control" formControlName="login">
+                <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">Empty Login !</div>
+
+            </div>
+            <div class="form-group">
+                <label for="password" id="password-label">Password</label>
+                <input [ngClass]="{'inputError': passwordCtrl.dirty && passwordCtrl.invalid}" type="password"
+                    id="password" class="form-control" formControlName="password">
+                <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Empty password !</div>
+
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid">Let's Go !</button>
+        </form>
+    </div>
+</div>

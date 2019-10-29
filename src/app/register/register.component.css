@@ -1,0 +1,4 @@
+.inputError {    
+    box-shadow: 0 0 10px rgb(231, 75, 75);
+    border: rgb(231, 75, 75);
+}
