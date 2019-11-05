@@ -4,13 +4,14 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import * as global from './endpoints/races';
 import { UserModel } from './models/user.model';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userEvents = new BehaviorSubject<UserModel>(undefined);
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.retrieveUser();
   }
 
@@ -35,5 +36,10 @@ export class UserService {
     if (user) {
       this.userEvents.next(JSON.parse(user));
     }
+  }
+  logout(): void {
+    window.localStorage.clear();
+    this.userEvents.next(null);
+    this.router.navigate(["/"]);
   }
 }

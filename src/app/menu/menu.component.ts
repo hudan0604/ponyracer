@@ -18,6 +18,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   toggleNavbar(): void {
     this.navbarCollapsed = !this.navbarCollapsed;
   }
+  logout(): void {
+    this.userService.logout();
+  }
 
   ngOnInit() {
     this.userEventsSubscription = this.userService.userEvents.subscribe(user => (this.user = user));
