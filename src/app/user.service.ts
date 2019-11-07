@@ -5,13 +5,14 @@ import * as global from './endpoints/races';
 import { UserModel } from './models/user.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { JwtInterceptorService } from './jwt-interceptor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userEvents = new BehaviorSubject<UserModel>(undefined);
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private jwtInterceptorService: JwtInterceptorService) {
     this.retrieveUser();
   }
 
@@ -29,17 +30,19 @@ export class UserService {
     window.localStorage.setItem('rememberMe', JSON.stringify(user));
   }
   getIteminLocalStorage(key: string) {
-    return window.localStorage.getItem(key);
+    return JSON.parse(window.localStorage.getItem(key));
   }
   retrieveUser(): void {
     const user = this.getIteminLocalStorage('rememberMe');
     if (user) {
-      this.userEvents.next(JSON.parse(user));
+      this.userEvents.next(user);
+      this.jwtInterceptorService.setJwtToken(user.token);
     }
   }
   logout(): void {
     window.localStorage.clear();
     this.userEvents.next(null);
+    this.jwtInterceptorService.removeJwtToken();
     this.router.navigate(["/"]);
   }
 }
