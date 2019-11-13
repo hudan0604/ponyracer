@@ -20,11 +20,13 @@ export class UserService {
     const body = { login, password, birthYear };
     return this.http.post<UserModel>(global.endpoint + '/api/users', body);
   }
-  authenticate(credentials: { login: string, password: string }) {
-    return this.http.post<UserModel>(global.endpoint + '/api/users/authentication', credentials).pipe(tap((user: UserModel) => {
-      this.userEvents.next(user);
-      this.storeLoggedInUser(user);
-    }));
+  authenticate(credentials: { login: string; password: string }) {
+    return this.http.post<UserModel>(global.endpoint + '/api/users/authentication', credentials).pipe(
+      tap((user: UserModel) => {
+        this.userEvents.next(user);
+        this.storeLoggedInUser(user);
+      })
+    );
   }
   storeLoggedInUser(user: UserModel) {
     window.localStorage.setItem('rememberMe', JSON.stringify(user));
@@ -43,6 +45,6 @@ export class UserService {
     window.localStorage.clear();
     this.userEvents.next(null);
     this.jwtInterceptorService.removeJwtToken();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 }

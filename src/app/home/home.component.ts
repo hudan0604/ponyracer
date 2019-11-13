@@ -9,10 +9,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   userEventsSubscription: Subscription;
   user: UserModel;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.userEventsSubscription = this.userService.userEvents.subscribe(user => (this.user = user));
@@ -22,6 +21,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.userEventsSubscription) {
       this.userEventsSubscription.unsubscribe();
     }
-
   }
 }

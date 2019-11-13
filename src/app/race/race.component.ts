@@ -7,12 +7,9 @@ import { RaceModel } from '../models/race.model';
   styleUrls: ['./race.component.css']
 })
 export class RaceComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() raceModel: RaceModel;
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

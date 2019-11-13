@@ -15,13 +15,23 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import { BetComponent } from './bet/bet.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, RacesComponent,
-    RaceComponent, PonyComponent, FromNowPipe, HomeComponent,
-    RegisterComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    RacesComponent,
+    RaceComponent,
+    PonyComponent,
+    FromNowPipe,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,
+    BetComponent
+  ],
   imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, RouterModule.forRoot(ROUTES)],
   providers: [{ provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

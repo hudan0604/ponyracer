@@ -11,7 +11,7 @@ import { UserModel } from '../models/user.model';
 export class MenuComponent implements OnInit, OnDestroy {
   userEventsSubscription: Subscription;
   user: UserModel;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   navbarCollapsed = true;
 
@@ -30,6 +30,5 @@ export class MenuComponent implements OnInit, OnDestroy {
     if (this.userEventsSubscription) {
       this.userEventsSubscription.unsubscribe();
     }
-
   }
 }

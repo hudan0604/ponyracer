@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
   passwordForm: FormGroup;
   loginCtrl: FormControl;
@@ -23,8 +22,6 @@ export class RegisterComponent implements OnInit {
     const confirmPassword = control.get('confirmPassword').value;
     return password !== confirmPassword ? { matchingError: true } : null;
   }
-
-
 
   constructor(fb: FormBuilder, private userService: UserService, private router: Router) {
     this.loginCtrl = fb.control('', [Validators.required, Validators.minLength(6)]);
@@ -49,13 +46,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   register() {
     this.userService
       .register(this.registerForm.value.login, this.registerForm.value.passwordForm.password, this.registerForm.value.birthYear)
       .subscribe(() => this.router.navigate(['/']), () => (this.registrationFailed = true));
   }
-
-
 }

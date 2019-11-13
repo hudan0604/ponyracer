@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginCtrl: FormControl;
   passwordCtrl: FormControl;
   loginForm: FormGroup;
@@ -18,21 +17,15 @@ export class LoginComponent implements OnInit {
   constructor(fb: FormBuilder, private userService: UserService, private router: Router) {
     this.loginCtrl = fb.control('', Validators.required);
     this.passwordCtrl = fb.control('', Validators.required);
-    this.loginForm = fb.group(
-      {
-        login: this.loginCtrl,
-        password: this.passwordCtrl
-      }
-    );
+    this.loginForm = fb.group({
+      login: this.loginCtrl,
+      password: this.passwordCtrl
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   login() {
     const credentials = { login: this.loginForm.value.login, password: this.loginForm.value.password };
-    this.userService
-      .authenticate(credentials)
-      .subscribe(() => this.router.navigate(['/']), () => (this.registrationFailed = true));
+    this.userService.authenticate(credentials).subscribe(() => this.router.navigate(['/']), () => (this.registrationFailed = true));
   }
-
 }
