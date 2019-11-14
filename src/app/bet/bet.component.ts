@@ -13,7 +13,7 @@ export class BetComponent implements OnInit {
   raceModel: RaceModel;
   betFailed = false;
 
-  constructor(private raceService: RaceService, private route: ActivatedRoute) {}
+  constructor(private raceService: RaceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const raceId = +this.route.snapshot.paramMap.get('raceId');
@@ -21,7 +21,10 @@ export class BetComponent implements OnInit {
   }
 
   betOnPony(pony: PonyModel) {
-    this.raceService.bet(this.raceModel.id, pony.id).subscribe(race => (this.raceModel = race), () => (this.betFailed = true));
+    if (this.isPonySelected(pony)) {
+      this.raceService.cancelBet(this.raceModel.id).subscribe(result => (this.raceModel.betPonyId = null), () => (this.betFailed = true));
+    }
+    else this.raceService.bet(this.raceModel.id, pony.id).subscribe(race => (this.raceModel = race), () => (this.betFailed = true));
   }
 
   isPonySelected(pony: PonyModel) {

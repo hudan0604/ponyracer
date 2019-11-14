@@ -8,7 +8,7 @@ import { RaceModel } from './models/race.model';
   providedIn: 'root'
 })
 export class RaceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   list(): Observable<Array<RaceModel>> {
     const params = { status: 'PENDING' };
@@ -21,5 +21,8 @@ export class RaceService {
 
   bet(raceId: number, ponyId: number): Observable<RaceModel> {
     return this.http.post<RaceModel>(`${global.endpoint}/api/races/${raceId}/bets`, { ponyId });
+  }
+  cancelBet(raceId: number) {
+    return this.http.delete(`${global.endpoint}/api/races/${raceId}/bets`);
   }
 }
