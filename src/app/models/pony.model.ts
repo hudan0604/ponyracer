@@ -5,5 +5,6 @@ export interface PonyModel {
 }
 
 export interface PonyWithPositionModel extends PonyModel {
-  position: number
+  position: number;
+  boosted?: boolean;
 }
