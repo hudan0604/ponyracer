@@ -6,13 +6,14 @@ import { UserModel } from './models/user.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import { WsService } from './ws.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userEvents = new BehaviorSubject<UserModel>(undefined);
-  constructor(private http: HttpClient, private router: Router, private jwtInterceptorService: JwtInterceptorService) {
+  constructor(private http: HttpClient, private router: Router, private jwtInterceptorService: JwtInterceptorService, private ws: WsService) {
     this.retrieveUser();
   }
 
@@ -46,5 +47,8 @@ export class UserService {
     this.userEvents.next(null);
     this.jwtInterceptorService.removeJwtToken();
     this.router.navigate(['/']);
+  }
+  scoreUpdates(userId: number): Observable<UserModel> {
+    return this.ws.connect(`/player/${userId}`);
   }
 }
