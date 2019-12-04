@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { JwtInterceptorService } from './jwt-interceptor.service';
 import { WsService } from './ws.service';
+import { MoneyHistoryModel } from './models/money-history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,4 +55,8 @@ export class UserService {
   isUserConnected(): boolean {
     return this.getIteminLocalStorage('rememberMe') ? true : false;
   }
+  getMoneyHistory(): Observable<Array<MoneyHistoryModel>> {
+    return this.http.get<Array<MoneyHistoryModel>>(`${global.endpoint}/api/money/history`);
+  }
+
 }
